@@ -8,7 +8,7 @@ function App() {
     e.preventDefault();
 
     const response = await fetch(
-      "https://v98raval2d.execute-api.ap-northeast-3.amazonaws.com/create",
+      "https://xej74lt1af.execute-api.ap-northeast-3.amazonaws.com/create",
       {
         method: "POST",
         headers: {
