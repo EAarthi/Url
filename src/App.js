@@ -1,45 +1,53 @@
-  import React, { useState } from 'react';
+import React, { useState } from "react";
 
-  function App() {
-    const [longURL, setLongURL] = useState('');
-    const [shortURL, setShortURL] = useState('');
+function App() {
+  const [longURL, setLongURL] = useState("");
+  const [shortURL, setShortURL] = useState("");
 
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-      const response = await fetch("https://jpfbh8kwpa.execute-api.ap-south-1.amazonaws.com/create", {
+    const response = await fetch(
+      "https://v98raval2d.execute-api.ap-northeast-3.amazonaws.com/create",
+      {
         method: "POST",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ longURL })
-      });
-
-      const data = await response.json();
-      setShortURL(data.shortURL);
-    };
-
-    return (
-      <div style={{ padding: 40 }}>
-        <h1>🔗 URL Shortener</h1>
-        <form onSubmit={handleSubmit}>
-          <input
-            type="text"
-            value={longURL}
-            onChange={(e) => setLongURL(e.target.value)}
-            placeholder="Paste long URL"
-            required
-            style={{ width: 300, padding: 10 }}
-          />
-          <button type="submit" style={{ marginLeft: 10, padding: 10 }}>Shorten</button>
-        </form>
-        {shortURL && (
-          <p>
-            Short URL: <a href={shortURL} target="_blank" rel="noreferrer">{shortURL}</a>
-          </p>
-        )}
-      </div>
+        body: JSON.stringify({ longURL }),
+      }
     );
-  }
 
-  export default App;
+    const data = await response.json();
+    setShortURL(data.shortURL);
+  };
+
+  return (
+    <div style={{ padding: 40 }}>
+      <h1>🔗 URL Shortener</h1>
+      <form onSubmit={handleSubmit}>
+        <input
+          type="text"
+          value={longURL}
+          onChange={(e) => setLongURL(e.target.value)}
+          placeholder="Paste long URL"
+          required
+          style={{ width: 300, padding: 10 }}
+        />
+        <button type="submit" style={{ marginLeft: 10, padding: 10 }}>
+          Shorten
+        </button>
+      </form>
+      {shortURL && (
+        <p>
+          Short URL:{" "}
+          <a href={shortURL} target="_blank" rel="noreferrer">
+            {shortURL}
+          </a>
+        </p>
+      )}
+    </div>
+  );
+}
+
+export default App;
